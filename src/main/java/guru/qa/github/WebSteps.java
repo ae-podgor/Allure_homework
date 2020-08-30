@@ -14,7 +14,7 @@ import static io.qameta.allure.Allure.*;
 public class WebSteps {
     public String url = "https://github.com";
     public String login = "ae-podgor";
-    public String password = "11";
+    public String password = "111";
     public String repository = "Allure_homework";
     public String title = "Issue from Web";
     public String assignee = "ae-podgor";

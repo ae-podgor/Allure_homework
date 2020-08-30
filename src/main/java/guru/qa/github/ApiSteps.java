@@ -18,7 +18,7 @@ public class ApiSteps {
     given()
 //            .proxy(3128)
             .filter(new AllureRestAssured())
-            .header("Authorization", "token e44aa28443ce99f52533308cc2b59c919ddce410")
+            .header("Authorization", "token a1b837480bf164009bafbc370947077a73f7b85d")
             .baseUri("https://api.github.com")
             .log().uri()
     .when()
@@ -37,7 +37,7 @@ public class ApiSteps {
         given()
 //            .proxy(3128)
                 .filter(new AllureRestAssured())
-                .header("Authorization", "token e44aa28443ce99f52533308cc2b59c919ddce410")
+                .header("Authorization", "token a1b837480bf164009bafbc370947077a73f7b85d")
                 .baseUri("https://api.github.com")
                 .log().uri()
         .when()
@@ -47,4 +47,7 @@ public class ApiSteps {
         .extract()
                 .as(Issue.class);
     }
+
+
+
 }

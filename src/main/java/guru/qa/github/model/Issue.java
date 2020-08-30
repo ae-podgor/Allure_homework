@@ -1,6 +1,5 @@
 package guru.qa.github.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
@@ -11,7 +10,7 @@ public class Issue implements Serializable {
 
     private String title;
     private String assignee;
-    private List<String> labels;
+    private List<Labels> labels;
 
     public void setTitle(String title) {
         this.title = title;
@@ -29,12 +28,12 @@ public class Issue implements Serializable {
         return assignee;
     }
 
-    public void setLabels(List<String> labels) {
-        this.labels = labels;
+    public List<Labels> getLabels() {
+        return labels;
     }
 
-    public List<String> getLabels() {
-        return labels;
+    public void setLabels(List<Labels> labels) {
+        this.labels = labels;
     }
 }
 

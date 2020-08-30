@@ -8,7 +8,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 
 @Owner("apodgornova")
@@ -17,6 +19,8 @@ public class IssueTestsWithSteps {
 
     private static final String BUG_LABEL = "bug";
     private static final String DUPLICATE_LABEL = "duplicate";
+    public String title = "Issue from Web";
+    public String assignee = "ae-podgor";
 
     WebSteps webSteps = new WebSteps();
     ApiSteps apiSteps = new ApiSteps();
@@ -44,11 +48,20 @@ public class IssueTestsWithSteps {
 
         int issueNumber = webSteps.getIssueNumber();
         Issue createdIssue = apiSteps.getIssueByNumber(issueNumber);
-        String title = createdIssue.getTitle();
-        String assignee = createdIssue.getAssignee();
-        List<String> labels = createdIssue.getLabels();
+//        String title = createdIssue.getTitle();
+//        String assignee = createdIssue.getAssignee();
+//        ArrayList<String> labelsName = new ArrayList<>();
+//        labelsName.add(createdIssue.getLabels().get(0).getName());
+//        labelsName.add(createdIssue.getLabels().get(1).getName());
 
-        apiSteps.checkThatIssueIsCreated(issueNumber, title, assignee, labels);
+        assertThat(createdIssue.getTitle(), is(title));
+        assertThat(createdIssue.getAssignee(), is(assignee));
+        assertThat(createdIssue.getLabels().get(0).getName(), is(BUG_LABEL));
+        assertThat(createdIssue.getLabels().get(1).getName(), is(DUPLICATE_LABEL));
+
+
+
+//        apiSteps.checkThatIssueIsCreated(issueNumber, title, assignee, labelsName);
 
     }
 
