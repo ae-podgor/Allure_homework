@@ -9,18 +9,20 @@ import java.util.List;
 import static com.codeborne.selenide.Selectors.byValue;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
+import static io.qameta.allure.Allure.*;
 
 public class WebSteps {
     public String url = "https://github.com";
     public String login = "ae-podgor";
-    public String password = "Uroborosss666711";
-    public String repository = "Allure_report_lesson_Alina";
+    public String password = "11";
+    public String repository = "Allure_homework";
     public String title = "Issue from Web";
     public String assignee = "ae-podgor";
 
-
     @Step("Login to Github")
     void login() {
+        parameter("Login", login);
+
         open(url);
         $(withText("Sign in")).click();
         $(By.name("login")).setValue(login);
@@ -30,6 +32,8 @@ public class WebSteps {
 
     @Step("Go to repository")
     void goToRepository() {
+        parameter("Repository", repository);
+
         $x("//*[@aria-label='View profile and more']").click();
         $(withText("Your repositories")).click();
         $(withText(repository)).click();
@@ -37,6 +41,10 @@ public class WebSteps {
 
     @Step("Create new Issue")
     void createIssue(String... labels) {
+        parameter("Title", title);
+        parameter("Assignee", assignee);
+        parameter("Labels", labels);
+
         $x("//*[@data-content='Issues']").click();
         $(".btn-primary > span").click();
 
@@ -48,9 +56,8 @@ public class WebSteps {
                 }
         );
         $("body").click();
-        $(withText("Assignees")).click();
-        $(withText("ae.podgor")).click();
-        $x("//*[@aria-label='Type or choose a name']").setValue(assignee);
+        $("#assignees-select-menu").click();
+        $(".js-username").click();
         $("#issue_title").setValue(title).pressEnter();
     }
 
@@ -59,9 +66,5 @@ public class WebSteps {
         return Integer.parseInt(($x("//span[contains(text(),'#')]").getText())
                 .replace("#", ""));
     }
-
-
-
-
 
 }
