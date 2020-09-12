@@ -10,8 +10,8 @@ repositories {
     mavenCentral()
 }
 
-
 dependencies {
+    compile 'org.aeonbits.owner:owner:1.0.12'
     compile 'io.qameta.allure:allure-java-commons:2.13.5'
     compile 'io.qameta.allure:allure-selenide:2.13.3'
     compile 'io.qameta.allure:allure-rest-assured:2.13.5'
@@ -37,5 +37,7 @@ tasks.withType(JavaCompile) {
 
 test {
     useJUnitPlatform()
+
+    systemProperty("webdriver.browser.name", "FIREFOX")
 }
 

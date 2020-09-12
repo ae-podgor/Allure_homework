@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Labels implements Serializable {
-    String name;
+public class Labels {
+    private String name;
 
     public void setName(String name) {
         this.name = name;

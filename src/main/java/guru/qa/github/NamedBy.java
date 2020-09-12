@@ -19,7 +19,7 @@ public class NamedBy extends By {
         this.origin = origin;
     }
 
-    public NamedBy as (final String name) {
+    public NamedBy as(final String name) {
         this.name = name;
         return this;
     }
@@ -30,7 +30,7 @@ public class NamedBy extends By {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return Optional.ofNullable(name).orElseGet(origin::toString);
 
     }

@@ -9,7 +9,7 @@ import java.util.List;
 public class Issue implements Serializable {
 
     private String title;
-    private String assignee;
+    private Assignee assignee;
     private List<Labels> labels;
 
     public void setTitle(String title) {
@@ -20,11 +20,11 @@ public class Issue implements Serializable {
         return title;
     }
 
-    public void setAssignee(String assignee) {
+    public void setAssignee(Assignee assignee) {
         this.assignee = assignee;
     }
 
-    public String getAssignee() {
+    public Assignee getAssignee() {
         return assignee;
     }
 

@@ -1,6 +1,9 @@
 package guru.qa.github;
 
+import guru.qa.github.configHelpers.ServiceConfig;
+import guru.qa.github.configHelpers.TestDataConfig;
 import io.qameta.allure.Step;
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.By;
 
 import java.util.Arrays;
@@ -12,37 +15,38 @@ import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.*;
 
 public class WebSteps {
-    public String url = "https://github.com";
-    public String login = "ae-podgor";
-    public String password = "111";
-    public String repository = "Allure_homework";
-    public String title = "Issue from Web";
-    public String assignee = "ae-podgor";
+
+    final ServiceConfig serviceConfig = ConfigFactory.newInstance().create(ServiceConfig.class);
+    final TestDataConfig testDataConfig = ConfigFactory.newInstance().create(TestDataConfig.class);
+
+    @Step("Open main page")
+    void openMainPage() {
+        open(serviceConfig.baseUrl());
+    }
 
     @Step("Login to Github")
     void login() {
-        parameter("Login", login);
+        parameter("Login", testDataConfig.login());
 
-        open(url);
         $(withText("Sign in")).click();
-        $(By.name("login")).setValue(login);
-        $(By.name("password")).setValue(password);
+        $(By.name("login")).setValue(testDataConfig.login());
+        $(By.name("password")).setValue(testDataConfig.password());
         $(byValue("Sign in")).click();
     }
 
     @Step("Go to repository")
     void goToRepository() {
-        parameter("Repository", repository);
+        parameter("Repository", testDataConfig.repository());
 
         $x("//*[@aria-label='View profile and more']").click();
         $(withText("Your repositories")).click();
-        $(withText(repository)).click();
+        $(withText(testDataConfig.repository())).click();
     }
 
     @Step("Create new Issue")
     void createIssue(String... labels) {
-        parameter("Title", title);
-        parameter("Assignee", assignee);
+        parameter("Title", testDataConfig.title());
+        parameter("Assignee", testDataConfig.assignee());
         parameter("Labels", labels);
 
         $x("//*[@data-content='Issues']").click();
@@ -58,7 +62,7 @@ public class WebSteps {
         $("body").click();
         $("#assignees-select-menu").click();
         $(".js-username").click();
-        $("#issue_title").setValue(title).pressEnter();
+        $("#issue_title").setValue(testDataConfig.title()).pressEnter();
     }
 
     @Step("Get Issue number")
